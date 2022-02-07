@@ -34,22 +34,7 @@ public class DeptDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (rset != null) {
-					rset.close();
-					rset = null;
-				}
-				if (stmt != null) {
-					stmt.close();
-					stmt = null;
-				}
-				if (con != null) {
-					con.close();
-					con = null;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			DBUtil.close(con, stmt, rset);
 		}
 	}
 
@@ -66,18 +51,7 @@ public class DeptDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				if (stmt != null) {
-					stmt.close();
-					stmt = null;
-				}
-				if (con != null) {
-					con.close();
-					con = null;
-				}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			DBUtil.close(con, stmt);
 		}
 	}
 
