@@ -39,7 +39,7 @@ public class DeptDAO {
 	}
 
 
-	public static void insertDept(int deptno, String dname, String loc) {
+	public static void insertDept(DeptDTO dept) {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		
@@ -47,9 +47,9 @@ public class DeptDAO {
 			con = DBUtil.getConnection();
 			
 			pstmt = con.prepareStatement("insert into dept values (?, ?, ?)");
-			pstmt.setInt(1, deptno);
-			pstmt.setString(2, dname);
-			pstmt.setString(3, loc);
+			pstmt.setInt(1, dept.getDeptno());
+			pstmt.setString(2, dept.getDname());
+			pstmt.setString(3, dept.getLoc());
 			
 			int result = pstmt.executeUpdate();
 			System.out.println(rset + "행 저장 성공");
