@@ -39,14 +39,15 @@ public class DeptDAO {
 	}
 
 
-	public static void insert() throws Exception {
+	public static void insertDept(int deptno, String dname, String loc) {
 		Connection con = null;
 		Statement stmt = null;
 		
 		try {
 			con = DBUtil.getConnection();
 			stmt = con.createStatement();
-			int rset = stmt.executeUpdate("insert into dept values(60, 'a', 'b')");
+			int result 
+			= stmt.executeUpdate("insert into dept values (" + deptno + ", '" + dname + "', '" + loc + "')");
 			System.out.println(rset + "행 저장 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
