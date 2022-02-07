@@ -39,7 +39,7 @@ public class DeptDAO {
 	}
 
 
-	public static void insert() {
+	public static void insert() throws Exception {
 		Connection con = null;
 		Statement stmt = null;
 		
@@ -50,6 +50,7 @@ public class DeptDAO {
 			System.out.println(rset + "행 저장 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw e;
 		} finally {
 			DBUtil.close(con, stmt);
 		}
