@@ -26,8 +26,7 @@ public class DBUtil {
 		String url 
 		= "jdbc:mysql://mydb-1.ckejbqh7xa7q.ap-northeast-2.rds.amazonaws.com:3306/playdata?serverTimezone=UTC";
 		
-		Connection con = DriverManager.getConnection(url, "encore", "playdata");
-		return con;
+		return DriverManager.getConnection(url, "encore", "playdata");
 	}
 
 	
@@ -71,6 +70,6 @@ public class DBUtil {
 	}
 	
 	
-	
+
 }
 	
