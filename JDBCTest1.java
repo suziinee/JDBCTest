@@ -9,7 +9,7 @@ public class JDBCTest1 {
 
 	
 	
-	public static void main(String[] args) {
+	public static void select() {
 
 		try {
 			//driver 로딩
@@ -45,5 +45,26 @@ public class JDBCTest1 {
 	}
 
 	
+	public static void insert() {
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			String url 
+			= "jdbc:mysql://mydb-1.ckejbqh7xa7q.ap-northeast-2.rds.amazonaws.com:3306/playdata?serverTimezone=UTC";
+			
+			Connection con = DriverManager.getConnection(url, "encore", "playdata");
+			Statement stmt = con.createStatement();
+			
+			int rset = stmt.executeUpdate("insert into dept values(60, 'a', 'b')");
+			System.out.println(rset + "행 저장 성공");
+		
+			stmt.close();
+			con.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 	
 }
