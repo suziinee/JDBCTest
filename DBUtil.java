@@ -7,14 +7,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class DBUtil {
-
+	static Properties dbInfo = new Properties();
 
 
 	//최초 무조건 실행, 모두가 공유하는 자원을 한번만 초기화 하는 로직으로 개발
 	static {
 		
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+			dbInfo.load(new FileReader("src/dbinfo.properties"));
+			Class.forName(dbInfo.getProperty("jdbc.driver"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -23,10 +24,9 @@ public class DBUtil {
 	
 	//접속 위치 반환, 요청시마다 새로 생성해서 제공함 (공유 안됨)
 	public static Connection getConnection() throws SQLException {
-		String url 
-		= "jdbc:mysql://mydb-1.ckejbqh7xa7q.ap-northeast-2.rds.amazonaws.com:3306/playdata?serverTimezone=UTC";
-		
-		return DriverManager.getConnection(url, "encore", "playdata");
+		return DriverManager.getConnection(dbInfo.getProperty("jdbc.url"),
+											dbInfo.getProperty("jdbc.id"),
+											dbInfo.getProperty("jdbc.pw"));
 	}
 
 	
