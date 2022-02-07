@@ -41,13 +41,17 @@ public class DeptDAO {
 
 	public static void insertDept(int deptno, String dname, String loc) {
 		Connection con = null;
-		Statement stmt = null;
+		PreparedStatement pstmt = null;
 		
 		try {
 			con = DBUtil.getConnection();
-			stmt = con.createStatement();
-			int result 
-			= stmt.executeUpdate("insert into dept values (" + deptno + ", '" + dname + "', '" + loc + "')");
+			
+			pstmt = con.prepareStatement("insert into dept values (?, ?, ?)");
+			pstmt.setInt(1, deptno);
+			pstmt.setString(2, dname);
+			pstmt.setString(3, loc);
+			
+			int result = pstmt.executeUpdate();
 			System.out.println(rset + "행 저장 성공");
 		} catch (Exception e) {
 			e.printStackTrace();
